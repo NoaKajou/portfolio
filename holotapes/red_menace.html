@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Menace - Fallout Clone</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background-color: #333;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+
+<h1 id="score">Score: 0</h1>
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Player properties
+    const player = {
+        x: 50,
+        y: 540,
+        width: 30,
+        height: 30,
+        speed: 5,
+        dx: 0,
+        dy: 0,
+        gravity: 0.5,
+        jumpForce: -12,
+        isJumping: false,
+        color: '#ff2d00',
+        score: 0
+    };
+
+    // Barrels
+    const barrels = [];
+    const barrelWidth = 30;
+    const barrelHeight = 30;
+    const barrelSpeed = 2;
+
+    // Platforms
+    const platforms = [
+        { x: 0, y: 570, width: canvas.width, height: 30 },
+        { x: 200, y: 450, width: 200, height: 10 },
+        { x: 400, y: 350, width: 200, height: 10 },
+        { x: 600, y: 250, width: 200, height: 10 },
+    ];
+
+    function drawPlayer() {
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    function drawBarrels() {
+        ctx.fillStyle = '#b5651d';
+        barrels.forEach(barrel => {
+            ctx.fillRect(barrel.x, barrel.y, barrelWidth, barrelHeight);
+        });
+    }
+
+    function drawPlatforms() {
+        ctx.fillStyle = '#5273eb';
+        platforms.forEach(platform => {
+            ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+        });
+    }
+
+    function update() {
+        // Move player
+        player.x += player.dx;
+
+        // Apply gravity
+        if (player.isJumping) {
+            player.dy += player.gravity;
+            player.y += player.dy;
+
+            // Check if player hits the ground
+            platforms.forEach(platform => {
+                if (player.y + player.height >= platform.y && 
+                    player.x + player.width > platform.x && 
+                    player.x < platform.x + platform.width) {
+                    player.y = platform.y - player.height;
+                    player.dy = 0;
+                    player.isJumping = false;
+                }
+            });
+        }
+
+        // Update barrels
+        barrels.forEach((barrel, index) => {
+            barrel.y += barrelSpeed;
+
+            // Check for collision with player
+            if (player.x < barrel.x + barrelWidth &&
+                player.x + player.width > barrel.x &&
+                player.y < barrel.y + barrelHeight &&
+                player.y + player.height > barrel.y) {
+                alert("Game Over! Your score: " + player.score);
+                document.location.reload();
+            }
+
+            // Remove barrels that fall off the screen
+            if (barrel.y > canvas.height) {
+                barrels.splice(index, 1);
+                player.score++;
+                document.getElementById('score').innerText = "Score: " + player.score;
+            }
+        });
+
+        // Boundary checks for player
+        if (player.x < 0) player.x = 0;
+        if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function spawnBarrel() {
+        const barrelX = Math.random() * (canvas.width - barrelWidth);
+        barrels.push({ x: barrelX, y: -barrelHeight });
+    }
+
+    function gameLoop() {
+        clearCanvas();
+        drawPlatforms();
+        drawPlayer();
+        drawBarrels();
+        update();
+        requestAnimationFrame(gameLoop);
+    }
+
+    function moveRight() {
+        player.dx = player.speed;
+    }
+
+    function moveLeft() {
+        player.dx = -player.speed;
+    }
+
+    function jump() {
+        if (!player.isJumping) {
+            player.dy = player.jumpForce;
+            player.isJumping = true;
+        }
+    }
+
+    function stopMovement() {
+        player.dx = 0;
+    }
+
+    // Keyboard event listeners
+    document.addEventListener('keydown', (e) => {
+        if (e.code === 'ArrowRight') moveRight();
+        if (e.code === 'ArrowLeft') moveLeft();
+        if (e.code === 'Space') jump();
+    });
+
+    document.addEventListener('keyup', (e) => {
+        if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') stopMovement();
+    });
+
+    // Spawn barrels every 1 second
+    setInterval(spawnBarrel, 1000);
+
+    gameLoop();
+</script>
+
+</body>
+</html>
