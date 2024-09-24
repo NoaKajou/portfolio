@@ -103,6 +103,52 @@
             padding: 0 10px;
         }
 
+        .notification {
+            position: fixed;
+            top: 20px; /* Ajuste la position selon tes préférences */
+            right: -300px; /* Commence en dehors de l'écran */
+            background-color: #1c1c1c; /* Couleur de fond de la notification */
+            color: white; /* Couleur du texte */
+            padding: 10px;
+            padding-top: 0px; /* Ajouter de l'espace en haut pour la barre de progression */
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: right 0.5s; /* Transition pour l'apparition */
+            z-index: 1000; /* S'assurer que la notification est au-dessus */
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.2); /* Couleur de fond de la barre de progression */
+            border-radius: 10px 10px 10px 10px; /* Arrondir seulement le haut */
+            overflow: hidden;
+            height: 5px; /* Hauteur de la barre de progression */
+            margin-bottom: 5px; /* Espace entre la barre et le texte */
+        }
+
+        .progress {
+            height: 100%; /* Hauteur de la barre de progression */
+            background-color: #5273eb; /* Couleur de la barre de progression */
+            width: 100%; /* Initialement à 100% */
+            transition: width 3s linear; /* Remplissage sur 10 secondes */
+        }
+
+
+
+        .notification.show {
+            right: 20px; /* Position when visible */
+        }
+
+        .notification .close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            float: right;
+        }
+
+
         .project-card:hover .project-content {
             opacity: 1;
         }
@@ -174,6 +220,7 @@
             text-align: center;
             padding: 20px;
         }
+
     </style>
 </head>
 <body>
@@ -188,6 +235,18 @@
         </nav>
     </header>
 
+    <!-- Notification volante -->
+    <div class="notification" id="notification">
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        Nouveau look pour la page ! 
+        <button class="close" id="closeButton">&times;</button>
+    </div>
+
+
+
+
     <section id="projets">
         <h2>Mes Projets</h2>
         <div class="grid">
@@ -198,25 +257,25 @@
                     <p>*Red Menace* est un mini-jeu de *Fallout 4* où le joueur doit sauter pour éviter des barils tombants. Avec des graphismes rétro et un gameplay simple, il évoque l'ambiance des jeux d'arcade classiques.</p>
                 </div>
             </a>
-            <a href="holotapes/Terminal_Minigame/index.html" class="project-card">
+            <a href="" class="project-card">
                 <img src="panne.jpeg" alt="Description du projet 2">
                 <div class="project-content">
-                    <h3>Projet 2</h3>
-                    <p>Description du projet 2.</p>
+                    <h3><!--rien a mettre--></h3>
+                    <p><!--rien a mettre--></p>
                 </div>
             </a>
             <a href="" class="project-card">
                 <img src="panne.jpeg" alt="Description du projet 3">
                 <div class="project-content">
-                    <h3>Projet 3</h3>
-                    <p>Description du projet 3.</p>
+                    <h3><!--rien a mettre--></h3>
+                    <p><!--rien a mettre--></p>
                 </div>
             </a>
             <a href="" class="project-card">
                 <img src="panne.jpeg" alt="Description du projet 4">
                 <div class="project-content">
-                    <h3>Projet 4</h3>
-                    <p>Description du projet 4.</p>
+                    <h3><!--rien a mettre--></h3>
+                    <p><!--rien a mettre--></p>
                 </div>
             </a>
         </div>
@@ -276,6 +335,41 @@
                 niveau.style.width = width; // Animer la largeur
             });
         });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const notification = document.getElementById('notification');
+            const closeButton = document.getElementById('closeButton');
+            const progress = document.getElementById('progress');
+
+            // Afficher la notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 500); // Apparition après 500ms
+
+            // Barre de progression
+            const duration = 10; // Durée en secondes
+            let width = 100; // Initialisation à 100%
+            
+            const interval = setInterval(() => {
+                width -= (100 / duration); // Réduction de la largeur
+                progress.style.width = `${width}%`; // Appliquer la nouvelle largeur
+                
+                if (width <= 0) {
+                    clearInterval(interval); // Arrêter l'intervalle
+                    notification.classList.remove('show'); // Fermer la notification
+                    notification.style.right = '-300px'; // Réinitialiser la position
+                }
+            }, 1000); // Réduction chaque seconde
+
+            // Fermer la notification manuellement
+            closeButton.addEventListener('click', () => {
+                clearInterval(interval); // Arrêter la barre de progression
+                notification.classList.remove('show');
+                notification.style.right = '-300px'; // Réinitialiser la position
+            });
+        });
+
+
     </script>
 </body>
 </html>
