@@ -130,51 +130,62 @@
             transition: opacity 0.3s;
             padding: 0 10px;
         }
-
+        
+                /* Notification container */
         .notification {
             position: fixed;
-            top: 20px; 
-            right: -300px; /* Commence en dehors de l'écran */
-            background-color: #1c1c1c; /* Couleur de fond de la notification */
-            color: white; /* Couleur du texte */
-            padding: 10px;
-            padding-top: 0px; /* Ajouter de l'espace en haut pour la barre de progression */
-            border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: right 0.5s; /* Transition pour l'apparition */
-            z-index: 1000; /* S'assurer que la notification est au-dessus */
+            top: 20px;
+            right: -350px; /* Initialement hors de l'écran */
+            background-color: #2d2d2d; /* Couleur de fond plus neutre */
+            color: #fff;
+            padding: 15px 20px; /* Plus d'espace pour un look épuré */
+            border-radius: 10px; /* Coins arrondis pour un design moderne */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombre légère */
+            transition: right 0.4s ease-in-out, opacity 0.4s ease-in-out; /* Transition fluide */
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0; /* Initialement invisible */
         }
-
-        .progress-bar {
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.2); /* Couleur de fond de la barre de progression */
-            border-radius: 10px 10px 10px 10px; /* Arrondir seulement le haut */
-            overflow: hidden;
-            height: 5px; /* Hauteur de la barre de progression */
-            margin-bottom: 5px; /* Espace entre la barre et le texte */
-        }
-
-        .progress {
-            height: 100%; /* Hauteur de la barre de progression */
-            background-color: #5273eb; /* Couleur de la barre de progression */
-            width: 100%; /* Initialement à 100% */
-            transition: width 3s linear; /* Remplissage sur 10 secondes */
-        }
-
-
 
         .notification.show {
-            right: 20px; /* Position when visible */
+            right: 20px; /* Apparaît sur l'écran */
+            opacity: 1; /* Transition fluide vers l'opacité */
         }
 
+        /* Close button */
         .notification .close {
             background: none;
             border: none;
-            color: white;
+            color: #fff;
             font-size: 20px;
             cursor: pointer;
-            float: right;
+            transition: transform 0.2s ease;
         }
+
+        .notification .close:hover {
+            transform: scale(1.1); /* Léger agrandissement au survol */
+        }
+
+        /* Progress bar container */
+        .progress-bar {
+            flex: 1;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.2); /* Barre de fond plus légère */
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        /* Progress bar itself */
+        .progress {
+            height: 100%;
+            background-color: #5273eb; /* Couleur de progression */
+            width: 100%; /* Commence à 100% */
+            transition: width 10s linear; /* Transition fluide */
+        }
+
 
 
         .project-card:hover .project-content {
