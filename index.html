@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        
+
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
@@ -21,57 +21,47 @@
             background-position: center;
         }
 
-        /* Header Style */
         header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.1); /* Couleur de fond semi-transparente */
+            border-radius: 10px; /* Arrondir les coins de la boîte */
+            padding: 20px; /* Ajouter de l'espace autour du contenu */
+            margin: 20px auto; /* Centrer horizontalement et ajouter de la marge */
+            max-width: 1200px; /* Largeur maximale de la boîte */
+            text-align: center; /* Centrer le texte */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre douce pour effet flottant */
+            backdrop-filter: blur(10px); /* Effet de flou derrière la boîte */
+            -webkit-backdrop-filter: blur(10px); /* Support pour Safari */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure subtile */
         }
 
-        .header-container {
-            background-color: rgba(255, 255, 255, 0.8); /* Fond noir avec opacité */
-            padding: 20px 40px;
-            border-radius: 15px; /* Bordures arrondies pour l'effet de boîte */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Ombre pour effet de profondeur */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 90%; /* Largeur limitée pour l'effet de boîte */
-            max-width: 1200px; /* Largeur maximale */
-        }
-
-        .header-container h1 {
+        header h1 {
             margin: 0;
-            font-size: 2em;
-            color: #ffffff;
+            color: #ffffff; /* Texte blanc */
+            font-size: 2.5em; /* Taille du texte */
         }
 
         nav ul {
             list-style: none;
-            display: flex;
-            gap: 30px; /* Espacement entre les liens du menu */
-            margin: 0;
+            padding: 0;
+            margin: 15px 0 0 0; /* Marges entre le texte et les liens */
         }
 
         nav ul li {
-            margin: 0;
+            display: inline-block;
+            margin: 0 15px;
         }
 
-        nav ul li a {
-            color: #ffffff;
+        nav a {
+            color: #ffffff; /* Couleur du texte des liens */
             text-decoration: none;
-            font-weight: bold;
             font-size: 1.2em;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
         }
 
-        nav ul li a:hover {
-            color: #5273eb; /* Couleur survolée */
+        nav a:hover {
+            color: #5273eb; /* Couleur au survol */
         }
+
 
 
         section {
