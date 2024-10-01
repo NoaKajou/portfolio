@@ -251,6 +251,22 @@
             padding: 20px;
         }
 
+        /* Pour les écrans de moins de 600px (téléphones) */
+    @media (max-width: 600px) {
+        .grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .project-card {
+            width: 100%; /* Chaque projet prend toute la largeur */
+            max-width: none; /* Pas de limite de largeur */
+        }
+    }
+
+
 </style>
 
     </style>
