@@ -1,0 +1,338 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #1c1c1c;
+    color: #e0e0e0;
+    /*background-image: url('img/background.jpg');*/
+
+    /* Répétition de l'image */
+    background-repeat: no-repeat;  /* L'image ne se répétera pas */
+    background-size: cover;  /* L'image couvrira toute la page */
+    background-position: center;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.1); /* Couleur de fond semi-transparente */
+    border-radius: 10px; /* Arrondir les coins de la boîte */
+    padding: 20px; /* Ajouter de l'espace autour du contenu */
+    margin: 20px auto; /* Centrer horizontalement et ajouter de la marge */
+    width: 80%; /* Largeur personnalisable du carré */
+    height: 100px; /* Hauteur personnalisable du carré */
+    max-width: 2000px; /* Limite la largeur maximale */
+    text-align: center; /* Centrer le texte */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre douce pour effet flottant */
+    backdrop-filter: blur(10px); /* Effet de flou derrière la boîte */
+    -webkit-backdrop-filter: blur(10px); /* Support pour Safari */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure subtile */
+}
+
+header h1 {
+    margin: 0;
+    color: #ffffff; /* Texte blanc */
+    font-size: 2.5em; /* Taille du texte */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0 0; /* Marges entre le texte et les liens */
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav a {
+    color: #ffffff; /* Couleur du texte des liens */
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #5273eb; /* Couleur au survol */
+}
+
+
+
+section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+#os {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: center;
+}
+
+.Présentation {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.os-card {
+    background: #2b2b2b;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.os-card h3 {
+    margin-bottom: 15px;
+    color: #5273eb;
+}
+
+.os-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.os-card li {
+    margin: 10px 0;
+    display: flex;
+}
+
+.os-card i {
+    margin-right: 10x;
+    font-size: 20px;
+    color: #5273eb;
+}
+
+#projets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.project-card {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 102, 255, 0.3);
+    transition: transform 0.3s;
+    text-align: center;
+}
+
+.project-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s;
+}
+
+.project-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s;
+    padding: 0 10px;
+}
+
+        /* Notification container */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: -350px; /* Initialement hors de l'écran */
+    background-color: #2d2d2d; /* Couleur de fond plus neutre */
+    color: #fff;
+    padding: 15px 20px; /* Plus d'espace pour un look épuré */
+    border-radius: 10px; /* Coins arrondis pour un design moderne */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombre légère */
+    transition: right 0.4s ease-in-out, opacity 0.4s ease-in-out; /* Transition fluide */
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0; /* Initialement invisible */
+}
+
+.notification.show {
+    right: 20px; /* Apparaît sur l'écran */
+    opacity: 1; /* Transition fluide vers l'opacité */
+}
+
+/* Close button */
+.notification .close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.notification .close:hover {
+    transform: scale(1.1); /* Léger agrandissement au survol */
+}
+
+/* Progress bar container */
+.progress-bar {
+    flex: 1;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.2); /* Barre de fond plus légère */
+    border-radius: 5px;
+    margin-left: auto;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+/* Progress bar itself */
+.progress {
+    height: 100%;
+    background-color: #5273eb; /* Couleur de progression */
+    width: 100%; /* Commence à 100% */
+    transition: width 10s linear; /* Transition fluide */
+}
+
+
+
+.project-card:hover .project-content {
+    opacity: 1;
+}
+
+.project-card:hover img {
+    filter: brightness(30%);
+}
+
+.project-card h3 {
+    margin: 10px 0;
+    font-size: 1.5em;
+}
+
+.project-card p {
+    margin: 0;
+}
+
+.competence-card {
+    background: #2b2b2b;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: left;
+}
+
+.competence-card h3 {
+    margin-bottom: 15px;
+    color: #5273eb;
+}
+
+.competence-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.competence-card li {
+    margin: 10px 0;
+    display: flex;
+}
+
+.competence-card i {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #5273eb;
+}
+
+.bar-container {
+    flex: 1; /* Prend l'espace restant */
+    background-color: #000;
+    border-radius: 5px;
+    vertical-align: middle;
+    height: 8px; /* Hauteur uniforme pour toutes les barres */
+    margin-top: 5px; /* Assurez-vous que les marges entre les barres sont appropriées */
+    width: 80%; /* Largeur fixe pour toutes les barres */
+    margin-left: 30px;
+}
+
+.niveau {
+    background-color: #5273eb;
+    height: 100%; /* Hauteur uniforme pour toutes les barres */
+    border-radius: 5px; 
+    vertical-align: middle;
+    transition: width 0.5s ease-in-out; /* Ajoutez une animation à la largeur */
+    width: 0; /* Initialisé à 0 pour les animations */
+}
+
+footer {
+    background: #1f1f1f;
+    text-align: center;
+    padding: 20px;
+}
+
+.etiquettes {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 5px; /* Espace entre les étiquettes */
+}
+
+.etiquette {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.etiquette.version {
+    background-color: #28a745; /* Couleur pour la version */
+}
+
+.etiquette.pc {
+    background-color: #ffca28; /* Couleur pour PC */
+}
+
+.etiquette.mobile {
+    background-color: #f44336; /* Couleur pour Mobile */
+}
+
+/* Pour les écrans de moins de 600px (téléphones) */
+@media (max-width: 600px) {
+.grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.project-card {
+    width: 100%; /* Chaque projet prend toute la largeur */
+    max-width: none; /* Pas de limite de largeur */
+}
+}
